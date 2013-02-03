@@ -36,7 +36,7 @@ At libs/valladolidcitybus.py lives Objects and methods related to Bus structure:
 
 City > Line > Route > Stop
 
-This objects, through BeautifulSoup extract information from spaghetti HTML at http://www.auvasa.es
+This objects, are filled up by BeautifulSoup extracted information from spaghetti HTML at http://www.auvasa.es
 
 LICENSE
 =======
