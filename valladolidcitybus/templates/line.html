@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}<span style="background-color:{{line.color}};padding:3px;color:#fff;">{{line.id}}</span> {{line.title}} &bull; {% endblock title %}
+{% block main %}
+<style>
+span.ui-icon.ui-icon-arrow-r.ui-icon-shadow {
+display:none;	
+} 
+</style>
+<ul data-role="listview" data-filter="true" data-filter-placeholder="Escribe para filtrar paradas">
+{% for route in line.routes() %}
+	{% if route|length > 0 %}
+		<li data-role="list-divider">Trayecto {{loop.index}}: {{route[0].address}} &rarr; {{route[-1].address}}</li>
+	{% endif %}
+	{% for stop in route %}
+		<li>
+			<a href="/check/{{line.id}}/{{stop.id}}" class="stop">
+			<h3>{{stop.address}}</h3>
+			<span class="ui-li-count checked" id="check-{{loop.index}}-{{stop.id}}">?</span>
+		</a>
+
+		</li>
+	{% endfor %}
+{% endfor %}
+</ul>
+<script>
+$(document).ready(function() {
+	$('.stop').live('click', function(event) {
+	//~ $('.stop').click(function(event) {
+		event.preventDefault();
+		event.stopImmediatePropagation();
+		var check_url = $(this).attr("href");
+		var checked = $(this).find("span");
+		$.get(check_url, function(data) {
+			checked.html(data);
+		});
+	});
+});
+</script>
+{% endblock main %}

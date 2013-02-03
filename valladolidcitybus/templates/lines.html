@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Líneas &bull;{% endblock title %}
+{% block main %}
+<ul data-role="listview" data-filter="true" data-filter-placeholder="Escribe para filtrar líneas" >
+{% for line in lines %}
+<li>
+	<a href="/{{line.id}}" rel="external">
+	<h3><span style="background-color:{{line.color}};padding:3px;color:#fff;">{{line.id}}</span> {{line.title}}</h3>
+<!--
+	<span class="ui-li-count">{{line.id}}</span>
+-->
+	<p>{{line.group.description }}</p>
+	</a>
+</li>
+{% endfor %}
+</ul>
+{% endblock main %}
